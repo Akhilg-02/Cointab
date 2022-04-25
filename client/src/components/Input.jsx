@@ -1,9 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
+import "../components/input.css"
 
 export const Input = () =>{
-    // const [weight , setWeight] = useState();
-    const [down , setDown]  = useState([]);
+    //const [down , setDown]  = useState([]);
     const [data , setData] = useState({
         weight:"",
         pin:"",
@@ -13,20 +13,40 @@ export const Input = () =>{
     const handleSubmit = (e) =>{
         e.preventDefault();
 
-       // const fieldName = e.target.getAttribute("name");
+        const fieldName = e.target.getAttribute("name");
         const fieldValue = e.target.value;
 
         const formData = {...data};
-        //formData[fieldName] = fieldValue;
+        formData[fieldName] = fieldValue;
 
         setData(formData);
     }
+
+    const Cost = (weight , pin) =>{
+
+        var approxWeight = Math.round(weight / 0.5) * 0.5;
+        var digit = approxWeight / 0.5;
+
+        if(digit === 0){
+            return ("Please Enter the pin / weight")
+        }
+    }
+
+    useEffect(()=>{
+        Cost();
+    })
+
+    
     
     return(
         <div>
+            <div className="form">
             <form action="" onClick={handleSubmit}>
-                <input placeholder="Weight" name="weight"  type="text" />
-                <input placeholder="Enter pin" name="pin"   type="text" />
+                <label htmlFor="">Weight: </label>
+                <input placeholder="Weight" name="weight"  type="text" /> <br /> <br />
+                <label htmlFor="">Pin Code: </label>
+                <input placeholder="Enter pin" name="pin"   type="text" /> <br /> <br />
+                <label htmlFor="">Delivery: </label>
                 <select name="" id="">
                     <option value="">
                             Delivery Type
@@ -37,12 +57,10 @@ export const Input = () =>{
                     <option value="">
                             Forward(RTO)
                     </option>
-                </select>
+                </select><br /> <br />
                 <input type="submit"/>
-
-        
             </form>
-           
+            </div>
        
         </div>
     )

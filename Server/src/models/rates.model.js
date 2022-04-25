@@ -1,8 +1,8 @@
-const pinSchema = new mongoose.Schema( 
+const RateSchema = new mongoose.Schema( 
     {
       weight:{type:Number , required:true},
       pin:{type:Number , required:true},
-      Delivery:{type:Number , required:true},
+      Delivery:{type:String , required:true},
        
         
     },
